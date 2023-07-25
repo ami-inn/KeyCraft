@@ -1,10 +1,11 @@
-import 'dotenv/config.'
+import 'dotenv/config'
 import express from 'express'
 import dbConnect from './dbConnect.js'
 import cors from 'cors'
 import path from 'path'
 import cookieParser from 'cookie-parser'
 import exp from 'constants'
+import verifyUser from './middlewares/verifyUser.js'
 
 
 const app=express()
@@ -26,3 +27,16 @@ app.use(
 
 
 dbConnect()
+
+app.get("/", (req, res)=>res.send("App running"))
+app.post('/login')
+app.get('/login/check')
+app.get('/logout')
+app.post('/register')
+app.post('/password/add',verifyUser)
+app.get('/passwords',verifyUser)
+app.patch('/password',verifyUser)
+
+app.listen(4000,()=>{
+    console.log('sever running on http://localhost:4000 ');
+})
