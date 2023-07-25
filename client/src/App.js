@@ -1,93 +1,64 @@
-import React from 'react';
-import {
-  MDBBtn,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBInput,
-  MDBCheckbox,
-  MDBIcon
-}
-from 'mdb-react-ui-kit';
+import React, { useEffect, useState } from 'react';
+
+import axios from 'axios'
+import {Router, Routes, Route, Navigate} from 'react-router-dom'
+
 
 function App() {
+  axios.defaults.baseURL='http://localhost/4000'
+  axios.defaults.withCredentials=true
+
+  const [user,setUser] = useState({login:null,details:{}})
+  const [refresh,setRefresh]=useState(true)
+
+  useEffect(()=>{
+    (
+      async function (){
+        let {data} = await axios.get('/login/check')
+
+        if(!data.login){
+          setUser({...user,login:false})
+        }else{
+          setUser({...user,login:true,details:data.user})
+        }
+      }
+    )();
+  },[refresh])
+
   return (
-    <MDBContainer  className='p-4'>
+<>
 
-      <MDBRow>
+    <Router>
 
-        <MDBCol md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
+    <Routes>
 
-          <h1 className="my-5 display-3 fw-bold ls-tight px-3">
-            The best offer <br />
-            <span className="text-primary">for your business</span>
-          </h1>
+    {
+      user.login && (
+        <>
 
-          <p className='px-3' style={{color: 'hsl(217, 10%, 50.8%)'}}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-            quibusdam tempora at cupiditate quis eum maiores libero
-            veritatis? Dicta facilis sint aliquid ipsum atque?
-          </p>
+        <Route path='/' />
+        <Route path='/login' element={<Navigate to={'/'} />} />
+        <Route path='/register' element={<Navigate to={'/'} />}/>
+        
+        </>
+      )
+    }
+    
+    {
+      user.login===false && (
+        <>
+        <Route path='/' element={<Navigate to={'/'}/>} />
+        <Route path="/login"/>
+        <Route path='/register'/>
+        </>
+      )
+    }
+    </Routes>
 
-        </MDBCol>
 
-        <MDBCol md='6'>
+    </Router>
 
-          <MDBCard className='my-5'>
-            <MDBCardBody className='p-5'>
-
-              <MDBRow>
-                <MDBCol col='6'>
-                  <MDBInput wrapperClass='mb-4' label='First name' id='form1' type='text'/>
-                </MDBCol>
-
-                <MDBCol col='6'>
-                  <MDBInput wrapperClass='mb-4' label='Last name' id='form1' type='text'/>
-                </MDBCol>
-              </MDBRow>
-
-              <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email'/>
-              <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password'/>
-
-              <div className='d-flex justify-content-center mb-4'>
-                <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Subscribe to our newsletter' />
-              </div>
-
-              <MDBBtn className='w-100 mb-4' size='md'>sign up</MDBBtn>
-
-              <div className="text-center">
-
-                <p>or sign up with:</p>
-
-                <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                  <MDBIcon fab icon='facebook-f' size="sm"/>
-                </MDBBtn>
-
-                <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                  <MDBIcon fab icon='twitter' size="sm"/>
-                </MDBBtn>
-
-                <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                  <MDBIcon fab icon='google' size="sm"/>
-                </MDBBtn>
-
-                <MDBBtn tag='a' color='none' className='mx-3' style={{ color: '#1266f1' }}>
-                  <MDBIcon fab icon='github' size="sm"/>
-                </MDBBtn>
-
-              </div>
-
-            </MDBCardBody>
-          </MDBCard>
-
-        </MDBCol>
-
-      </MDBRow>
-
-    </MDBContainer>
+</>
   );
 }
 
