@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import axios from 'axios'
-import {Router, Routes, Route, Navigate} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
+import Register from './components/Register/Register';
 
 
 function App() {
-  axios.defaults.baseURL='http://localhost/4000'
+  axios.defaults.baseURL='http://localhost:4000'
   axios.defaults.withCredentials=true
 
   const [user,setUser] = useState({login:null,details:{}})
@@ -36,8 +37,8 @@ function App() {
       user.login && (
         <>
 
-        <Route path='/' />
-        <Route path='/login' element={<Navigate to={'/'} />} />
+        <Route path='/' element={<Navigate to={'/register'}/>} />
+        {/* <Route path='/login' element={<Navigate to={'/'} />} /> */}
         <Route path='/register' element={<Navigate to={'/'} />}/>
         
         </>
@@ -47,9 +48,9 @@ function App() {
     {
       user.login===false && (
         <>
-        <Route path='/' element={<Navigate to={'/'}/>} />
-        <Route path="/login"/>
-        <Route path='/register'/>
+        <Route path='/' element={<Navigate to={'/register'}/>} />
+        {/* <Route path="/login" element={<Navigate to={'/login'}/>}/> */}
+        <Route path='/register' element={<Register setRefresh={setRefresh}/>}/>
         </>
       )
     }

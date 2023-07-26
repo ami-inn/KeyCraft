@@ -40,5 +40,5 @@ app.get('/passwords',verifyUser,getPassword)
 app.patch('/password',verifyUser,deletePassword)
 
 app.listen(4000,()=>{
-    console.log('sever running on http://localhost:4000 ');
+    console.log('sever running on http://localhost:4000');
 })

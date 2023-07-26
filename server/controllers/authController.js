@@ -1,6 +1,6 @@
 import UserModel from "../models/userModel.js";
 import bcrypt from 'bcryptjs'
-import jwt from 'jwt'
+import jwt from 'jsonwebtoken'
 import validatePassword from "../helpers/validatePassword.js";
 
 var salt=bcrypt.genSaltSync(10)
@@ -90,11 +90,14 @@ export async function login(req,res){
 
 export const checkLogin = async(req,res)=>{
     try{
+        console.log('enterh ererer');
         const token = req.cookies.token
         if(!token){
+            console.log('entrereedd');
             return res.json({login:false, error:true, message:'no token'})
         }
-        const verifiedJWT = jwt.verif(token,'mysecretjwtkey')
+        const verifiedJWT = jwt.verify(token,'mysecretjwtkey')
+        console.log(verifiedJWT,'fdf');
         const user = await UserModel.findById(verifiedJWT.id,{password:0})
 
         if(!user){
