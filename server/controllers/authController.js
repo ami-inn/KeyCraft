@@ -11,11 +11,15 @@ export async function register(req,res){
 
         const {email,password,name} = req.body
 
+        console.log('req bodeee',req.body);
+
         if(!email || !password || !name){
             return res.json({err:true,message:'please enter all field'})
         }
 
         const validationPassword = validatePassword(password)
+
+        console.log(validationPassword,'validdd');
 
         if(!validationPassword.status){
             return res.json({err:true,message:validatePassword.message[0].message})
@@ -28,6 +32,7 @@ export async function register(req,res){
         }
 
         const hashPassword = bcrypt.hashSync(password,salt)
+        console.log(hashPassword,'hass');
         user = await UserModel.create({name,email,password:hashPassword})
 
         const token = jwt.sign(

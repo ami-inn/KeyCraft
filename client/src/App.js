@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
 import Register from './components/Register/Register';
+import Home from './components/Home/Home';
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
       user.login && (
         <>
 
-        <Route path='/' element={<Navigate to={'/register'}/>} />
+        <Route path='/' element={<Home user={user} refresh={refresh} setRefresh={setRefresh}/>} />
         {/* <Route path='/login' element={<Navigate to={'/'} />} /> */}
         <Route path='/register' element={<Navigate to={'/'} />}/>
         
