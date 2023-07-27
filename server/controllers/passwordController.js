@@ -1,7 +1,6 @@
 
 import passwordModel from "../models/passwordModel.js";
-import { encrypt } from "../helpers/encryptDecryt.js";
-import { decrypt } from "dotenv";
+import { encrypt,decrypt } from "../helpers/encryptDecryt.js";
 
 
 export async function addPassword(req,res){
@@ -38,16 +37,23 @@ export async function addPassword(req,res){
 
 export async function getPassword(req,res){
     try{
+        console.log('get entere');
+        console.log(req.user._id,'userIddd');
         let passwords = await passwordModel.find({userId:req.user._id})
+
+        console.log(passwords,'passwordssss');
 
         passwords= passwords.map((item)=>{
             return { appName:item.appName, userName:item.userName, _id:item._id, password: decrypt(item.password)}
         })
-        return res.json({err:true,message:'success'})
+        console.log(passwords,'next');
+
+        return res.json({err:false,message:'success',passwords})
 
     }
     catch(err){
-        res.json({err:true,message:'internal server error'})
+        console.log('enter hereeess',err);
+        res.json({err:true,message:'internal server errorsss'})
     }
 }
 

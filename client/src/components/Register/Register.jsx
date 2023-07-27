@@ -37,7 +37,7 @@ function Register({setRefresh}) {
 
       if(!data.err){
         console.log(data);
-        
+        setRefresh(refresh => !refresh)
         alert('success')
       }else{
         console.log(data);
@@ -55,8 +55,24 @@ function Register({setRefresh}) {
       if(data.err){
         alert('error')
       }else{
+        setRefresh(refresh => !refresh)
         alert('success')
       }
+    }
+
+    const demoLogin = async (e) => {
+      e.preventDefault();
+      console.log('enterr');
+      setLoading(true)
+      let { data } = await axios.post("/login", { email:"amipk2001@gmail.com", password:"ami@123Pk" });
+      
+      console.log(data);
+      if (data.err) {
+        setErr(data.message)
+      } else {
+        setRefresh(refresh => !refresh)
+      }
+      setLoading(false)
     }
 
   return (
@@ -87,8 +103,9 @@ function Register({setRefresh}) {
       <input className='inputBoxLogin2' value={lEmail} onChange={(e)=>setLemail(e.target.value)} type="email" name="email" placeholder="Email" required />
       <input className='inputBoxLogin2' type="password" onChange={(e) => setLpassword(e.target.value)} name="pswd" placeholder="password" required />
       <button className='button' type='submit'>Login</button>
-      <button className='dbutton'>Demo</button>
+    
     </form>
+    <button className='dbutton' onClick={demoLogin}>Demo</button>
   </div>
 </div>
     </div>
