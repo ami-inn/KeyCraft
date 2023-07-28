@@ -130,3 +130,21 @@
 #chk:checked ~ .signup label{
     transform: scale(.6);
 }
+.googleButton{
+    width: 60%;
+    height: 40px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    background:white;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}

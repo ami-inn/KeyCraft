@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+
 import axios from 'axios';
 import './Register.css'
 import validatePassword from '../../helper/validatePassword';
+import { GoogleLoginButton } from "react-social-login-buttons";
+import { LoginSocialGoogle } from "reactjs-social-login";
+
 
 function Register({setRefresh}) {
     const [err, setErr] = useState("")
@@ -15,6 +18,16 @@ function Register({setRefresh}) {
     const [name,setName]=useState('')
     const [loading,setLoading]=useState(false)
     const [logOpen,setlogOpen]=useState(false)
+
+    // gooogle auth
+    
+
+    let clientId='140726925070-dg7n53e2cjpf9ppqot3uqlkjkgpk8o35.apps.googleusercontent.com'
+ 
+
+ 
+    /////
+
 
     const haldePassword=(e)=>{
       setSpassword(e.target.value)
@@ -106,6 +119,24 @@ function Register({setRefresh}) {
     
     </form>
     <button className='dbutton' onClick={demoLogin}>Demo</button>
+    <div>
+      <LoginSocialGoogle
+        client_id={clientId}
+        scope="openid profile email"
+        discoveryDocs="claims_supported"
+        access_type="offline"
+        onResolve={({ provider, data }) => {
+          console.log(provider, data);
+        }}
+        onReject={(err) => {
+          console.log(err);
+        }}
+      >
+        <GoogleLoginButton />
+      </LoginSocialGoogle>
+    </div>
+
+  
   </div>
 </div>
     </div>

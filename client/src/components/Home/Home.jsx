@@ -21,6 +21,7 @@ import copyToClipboard from '../../helper/copyToClipboard';
 import Swal from 'sweetalert2';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import trash from '../../images/trash.gif';
 
 
 export default function Home({user,setRefresh,refresh}) {
@@ -120,7 +121,7 @@ export default function Home({user,setRefresh,refresh}) {
                                         <MDBCardBody>
                                             <div className='d-flex justify-content-between align-items-center'>
                                                 <div className='d-flex align-items-center'>
-                                                    <img src="https://lh4.googleusercontent.com/zxHGfDuP9OcnUCHnOaV77PUez3jUnliiGJr4GmdExFZxMe5X3nqG9R8qTcBFcknkQ_lxT-rtQS42jXWqWr9E-xMNv50ri-pFg-HdQi_MQ-j75jkYuf5KILd8RdG8SC4zp8FMqJME9_atihTsBujbVdQAj_jwd6I0Tc3XP0stjsW_AHxAuX-OED49xizrBA" style={{ height: 65 }} className="rounded-circle" />
+                                                    <img src="https://cdn.pixabay.com/photo/2019/10/24/08/23/lock-4573711_1280.png" style={{ height: 65 }} className="rounded-circle" />
                                                     <div className='ms-3'>
                                                         <p className='fw-bold mb-1' style={{color:'#bdb9ff'}}>{item.appName}</p>
                                                         <p className='text-muted mb-0' style={{color:'#bdb9ff'}}>{item.userName}</p>
@@ -133,6 +134,7 @@ export default function Home({user,setRefresh,refresh}) {
                                             <MDBBtn   rippleColor='primary' className=' w-100' style={{" --mdb-btn-hover-color": "#0f0c2e", background:'#0f0c2e',boxShadow:'none',color:'#e24e4e' }} onClick={() => deletePassword(item._id)} >
                                                 delete
                                                 <MDBIcon style={{color:'#e24e4e'}} icon='trash' className='ms-3' />
+                                                {/* <img src={trash} style={{width:'10px' }} alt="" /> */}
                                             </MDBBtn>
                                             <MDBBtn className=' m-0 w-100'  style={{" --mdb-btn-hover-color": "#0f0c2e", background:'#0f0c2e',boxShadow:'none',color:'#bdb9ff'}} rippleColor='primary' onClick={() => {copyToClipboard(item.password); setOpen(true)}} >
                                                 Copy password <MDBIcon style={{color:'#bdb9ff'}} fas icon='clipboard' className='ms-3' />

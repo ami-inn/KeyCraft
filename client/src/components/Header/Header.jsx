@@ -11,7 +11,8 @@ import {
     MDBNavbarBrand,
     MDBRow,
 } from 'mdb-react-ui-kit';
-// import icon from '../../images/lock.png'
+import banner from '../../images/banner.png';
+
 import axios from 'axios';
 
 export default function Header({ setRefresh }) {
@@ -63,7 +64,7 @@ export default function Header({ setRefresh }) {
                 </MDBContainer> */}
                 <div
                     className='p-5 text-center container bg-image'
-                    style={{ backgroundSize: "contain", backgroundImage: "url('https://cdn.dribbble.com/users/56427/screenshots/5906005/causevox_illustration-01.jpg?resize=800x600&vertical=center')", height: '350px' }}
+                    style={{ backgroundSize: "contain", backgroundImage: `url(${banner})`, height: '350px' }}
                 >
                 </div>
             </header>

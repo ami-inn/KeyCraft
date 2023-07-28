@@ -54,6 +54,95 @@ export async function register(req,res){
     }
 }
 
+export async function googleLogin(req,res){
+    try{
+
+        console.log('enter heree');
+
+        const {name,email}=req.body
+
+        console.log('enter ' ,req.body);
+        
+        if(!email || !name){
+            return res.json({err:true,message:'please enter all field'})
+        }
+
+        
+        let user = await UserModel.findOne({email})
+
+        console.log(user,'userr');
+
+        // if(user && user.googleLoggedIn){
+
+        //     console.log('enter herre');
+
+        //     const token = jwt.sign(
+        //         {id:user._id},
+        //         'mysecretjwtkey'
+        //     )
+    
+        //     return res.cookie('token',token,{
+        //         httpOnly:true,
+        //         secure:true,
+        //         maxAge:1000*60*5,
+        //         sameSite:'none'
+        //     }).json({err:false,message:'success'})
+            
+           
+        // }else{
+        //  return res.json({err:true,message:'user login'})
+        // }
+
+        console.log('user',user)
+
+        if(user && user.googleLoggedIn){
+            console.log('enter herre');
+
+                const token = jwt.sign(
+                    {id:user._id},
+                    'mysecretjwtkey'
+                )
+        
+                return res.cookie('token',token,{
+                    httpOnly:true,
+                    secure:true,
+                    maxAge:1000*60*5,
+                    sameSite:'none'
+                }).json({err:false,message:'success'})
+
+        }else if(user){
+            return res.json({err:true,message:'user login'})
+
+        }else{
+
+            user = await UserModel.create({name,email,googleLoggedIn:true})
+            const token = jwt.sign(
+                {
+                    id:user._id
+                },
+                'mysecretjwtkey'
+            )
+    
+            return res.cookie('token',token,{
+                httpOnly:true,
+                secure:true,
+                maxAge: 1000 * 60 * 5,
+                sameSite:"none",
+            }).json({err:false,message:'success'})
+
+        }
+
+       
+    }
+
+
+
+    
+    catch(err){
+        return res.json({err:true,message:'error'})
+    }
+}
+
 
 export async function login(req,res){
     try{

@@ -6,9 +6,17 @@ import Register from './components/Register/Register';
 import Home from './components/Home/Home';
 
 
+
+
+
 function App() {
   axios.defaults.baseURL='http://localhost:4000'
   axios.defaults.withCredentials=true
+
+
+
+
+
 
   const [user,setUser] = useState({login:null,details:{}})
   const [refresh,setRefresh]=useState(true)
