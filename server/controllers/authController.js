@@ -50,6 +50,7 @@ export async function register(req,res){
         }).json({err:false,message:'success'})
     }
     catch(err){
+        console.log(err,'error');
         res.json({err:true,message:'something went wrong'})
     }
 }
