@@ -120,7 +120,7 @@ function Register({setRefresh}) {
     </form>
     <button className='dbutton' onClick={demoLogin}>Demo</button>
     <div>
-      <LoginSocialGoogle
+      {/* <LoginSocialGoogle
         client_id={clientId}
         scope="openid profile email"
         discoveryDocs="claims_supported"
@@ -133,7 +133,7 @@ function Register({setRefresh}) {
         }}
       >
         <GoogleLoginButton />
-      </LoginSocialGoogle>
+      </LoginSocialGoogle> */}
     </div>
 
   

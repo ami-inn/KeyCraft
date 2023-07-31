@@ -133,7 +133,7 @@ export default function AddPasswordModal({open, setOpen, setRefresh, setCopyOpen
                             <MDBRow className='mt-3'>
                                 <div className='d-flex' style={{gap:"10px"}}>
 
-                                    <MDBBtn className='w-100' style={{background:'none' ,color:'rgb(189, 185, 255)' , border:'solid 2px rgb(189, 185, 255)' ,boxShadow:'none'}} onClick={() => setPageReload(!pageReload)}>
+                                    <MDBBtn className='w-100' style={{background:'none' ,color:'rgb(189, 185, 255)' , border:'solid 2px rgb(189, 185, 255)' ,boxShadow:'none'}} onClick={() => setPageRelod(!pageRelod)}>
                                     Generate new
                                     </MDBBtn>
                                 </div>

@@ -10,7 +10,7 @@ import Home from './components/Home/Home';
 
 
 function App() {
-  axios.defaults.baseURL='http://localhost:4000'
+  axios.defaults.baseURL=['http://localhost:4000','https://keycraft.onrender.com/']
   axios.defaults.withCredentials=true
 
 
