@@ -10,7 +10,7 @@ import Home from './components/Home/Home';
 
 
 function App() {
-  axios.defaults.baseURL='https://keycraft.onrender.com/'
+  axios.defaults.baseURL='https://keycraft.onrender.com'
   axios.defaults.withCredentials=true
 
 
