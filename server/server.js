@@ -21,7 +21,7 @@ app.use(
     cors({
         origin: [
           "http://localhost:3000", 
-          "https://keycraft.netlify.app"
+          "https://keycraft.netlify.app/"
         ],
         credentials: true,
       })
